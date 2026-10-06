@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>메이플 업적</title>
+<style>
+:root{
+  --sky:#87CEEB;
+  --blue:#4A90E2;
+  --green:#7BC47F;
+  --violet:#8A2BE2;
+  --bg:#F7FAFC;
+  --text:#25324A;
+  --muted:#7B8798;
+  --line:#E6ECF2;
+  --white:#fff;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,"Noto Sans KR",sans-serif;background:var(--bg);color:var(--text)}
+button,input{font:inherit}
+.app{display:flex;min-height:100vh}
+.sidebar{position:fixed;left:0;top:0;bottom:0;width:235px;background:#fff;border-right:1px solid var(--line);padding:28px 18px;z-index:5}
+.logo{font-size:22px;font-weight:800;margin:0 8px 30px}
+.logo span{color:var(--blue)}
+.nav-title{font-size:12px;color:#9AA5B4;margin:0 10px 10px}
+.nav a{display:flex;align-items:center;gap:12px;padding:12px 13px;margin:4px 0;border-radius:12px;text-decoration:none;color:#596679;font-size:14px}
+.nav a.active{background:#EAF5FF;color:var(--blue);font-weight:700}
+.nav a:hover{background:#F2F6FA}
+.main{margin-left:235px;width:calc(100% - 235px);padding:28px 38px 50px}
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
+.topbar h1{margin:0;font-size:26px}
+.search{width:330px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:11px 14px;outline:none}
+.search:focus{border-color:var(--blue)}
+.hero{background:linear-gradient(135deg,#EAF8FF,#F7FBFF);border:1px solid #D9EEF9;border-radius:20px;padding:28px;display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+.hero h2{margin:0 0 8px;font-size:24px}.hero p{margin:0;color:var(--muted);font-size:14px}
+.progress-wrap{width:280px}.progress-label{display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px}
+.progress{height:10px;background:#DCEAF2;border-radius:10px;overflow:hidden}.progress i{display:block;height:100%;width:64%;background:var(--blue);border-radius:10px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px}
+.stat-label{color:var(--muted);font-size:13px}.stat-value{font-size:27px;font-weight:800;margin-top:8px}
+.section-head{display:flex;align-items:center;justify-content:space-between;margin:30px 0 14px}.section-head h2{font-size:18px;margin:0}.more{font-size:13px;color:var(--blue);text-decoration:none}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.achievement{min-height:175px}
+.badge{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;color:#fff;font-weight:800;margin-bottom:15px}
+.badge.blue{background:var(--blue)}.badge.green{background:var(--green)}.badge.violet{background:var(--violet)}
+.achievement h3{margin:0 0 7px;font-size:16px}.achievement p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}
+.mini-progress{height:7px;background:#EDF1F5;border-radius:8px;margin-top:15px;overflow:hidden}.mini-progress i{display:block;height:100%;background:var(--green);border-radius:8px}
+.record-list{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.record{display:flex;align-items:center;justify-content:space-between;padding:17px 20px;border-bottom:1px solid var(--line)}
+.record:last-child{border-bottom:0}.record strong{font-size:14px}.record span{font-size:12px;color:var(--muted)}
+.tag{padding:5px 9px;border-radius:8px;background:#EEF8EF;color:#4D9A52;font-size:11px;font-weight:700}
+.footer-note{text-align:center;color:#9AA5B4;font-size:12px;margin-top:35px}
+@media(max-width:900px){
+ .sidebar{width:190px}.main{margin-left:190px;width:calc(100% - 190px);padding:24px}
+ .stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:repeat(2,1fr)}
+ .progress-wrap{width:220px}
+}
+@media(max-width:700px){
+ .sidebar{position:static;width:100%;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:14px}
+ .app{display:block}.main{margin-left:0;width:100%;padding:18px}
+ .logo{margin:4px 8px 12px}.nav{display:flex;overflow:auto;gap:5px}.nav-title{display:none}.nav a{white-space:nowrap;margin:0}
+ .hero{display:block}.progress-wrap{width:100%;margin-top:20px}
+ .topbar{display:block}.search{width:100%;margin-top:12px}
+ .grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="logo">메이플 <span>업적</span></div>
+    <div class="nav-title">MENU</div>
+    <nav class="nav">
+      <a class="active" href="#">🏠 홈</a>
+      <a href="#">🏆 업적</a>
+      <a href="#">🎯 목표 업적</a>
+      <a href="#">🏅 랭킹</a>
+      <a href="#">🖼 전시관</a>
+      <a href="#">❓ 도움말</a>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <h1>업적 대시보드</h1>
+      <input class="search" placeholder="업적명, 조건, 보상 검색">
+    </div>
+
+    <section class="hero">
+      <div>
+        <h2>나의 업적 현황</h2>
+        <p>달성한 업적과 진행 중인 목표를 한눈에 확인해보세요.</p>
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-label"><span>전체 달성률</span><strong>64%</strong></div>
+        <div class="progress"><i></i></div>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div class="card"><div class="stat-label">전체 업적</div><div class="stat-value">1,248</div></div>
+      <div class="card"><div class="stat-label">달성 업적</div><div class="stat-value">798</div></div>
+      <div class="card"><div class="stat-label">목표 업적</div><div class="stat-value">12</div></div>
+      <div class="card"><div class="stat-label">내 순위</div><div class="stat-value">#2,481</div></div>
+    </section>
+
+    <div class="section-head"><h2>목표 업적</h2><a class="more" href="#">전체 보기 →</a></div>
+    <section class="grid">
+      <article class="card achievement">
+        <div class="badge blue">A</div><h3>모험의 시작</h3>
+        <p>모험 관련 업적을 차근차근 달성해보세요.</p>
+        <div class="mini-progress"><i style="width:82%"></i></div>
+      </article>
+      <article class="card achievement">
+        <div class="badge green">B</div><h3>수집가</h3>
+        <p>아이템을 수집하고 다양한 업적을 완성하세요.</p>
+        <div class="mini-progress"><i style="width:57%"></i></div>
+      </article>
+      <article class="card achievement">
+        <div class="badge violet">C</div><h3>끝없는 도전</h3>
+        <p>높은 난이도의 업적에 도전하고 기록을 남겨보세요.</p>
+        <div class="mini-progress"><i style="width:34%"></i></div>
+      </article>
+    </section>
+
+    <div class="section-head"><h2>최근 달성 기록</h2><a class="more" href="#">전체 기록 →</a></div>
+    <section class="record-list">
+      <div class="record"><div><strong>새로운 지역 탐험</strong><br><span>2026.10.05</span></div><span class="tag">달성 완료</span></div>
+      <div class="record"><div><strong>첫 번째 컬렉션</strong><br><span>2026.10.02</span></div><span class="tag">달성 완료</span></div>
+      <div class="record"><div><strong>친구와 함께한 모험</strong><br><span>2026.09.28</span></div><span class="tag">달성 완료</span></div>
+    </section>
+
+    <div class="footer-note">Maple Achievement · PC Web Prototype</div>
+  </main>
+</div>
+</body>
+</html>
